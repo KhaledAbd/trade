@@ -1,0 +1,65 @@
+{% extends 'Triko/model_show.html' %}
+{% load static %}
+{% block form_model %}
+<br>
+<br>
+
+<div class = "container">
+    <div class = "row">
+      <div class = "col-sm-9">
+      <form method="post">
+        {% csrf_token %}
+
+        {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+        {% endfor %}
+
+  {% for field in form.visible_fields %}
+    <div class="form-group">
+            {{ field.label_tag }}
+      <br>
+            {{ field }}
+
+      {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary" style="width : 150px;">تسجيل</button>
+</form>
+            <div class="col-sm-3">
+      <a href="{% url 'Triko:show_details' cloth.id %}" class="btn btn-primary my-2">رجوع للعرض</a>
+    </div>
+</div>
+</div>
+  </div>
+  <!--
+<form method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">{{form.name.label_tag}}</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value = "{{form.name.name}}">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">{{form.name.telephone}}</label>
+    <input type="tel" class="form-control" id="exampleInputPassword1" placeholder="Password" value = "{{form.telephone}}">
+  </div>
+  <div class="form-check">
+    <input type="number" class="form-check-input" id="exampleCheck1" value="{{form.quentity}}">
+    <label class="form-check-label" for="exampleCheck1">{{form.quentity.label_tag}}</label>
+  </div>
+   <div class="form-group">
+    <label for="address">{{ form.address.label_tag }}</label>
+    <input type="tel" class="form-control" id="address" placeholder="Password" value = "{{form.address}}">
+  </div>
+  <div class="form-group">
+    <label for="email_facebook">{{ form.email_facebook.label_tag }}</label>
+    <input type="tel" class="form-control" id="email_facebook" placeholder="حساب الكترونى" value = "{{  form.email_facebook }}">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+-->
+{% endblock%}
