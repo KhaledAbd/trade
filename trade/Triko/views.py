@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -6,11 +7,6 @@ from .forms import TradersForm
 
 
 # Create your views here.
-
-def home(request):
-    triko = Triko_Model.objects.all()
-    return render(request, 'Triko/show.html', {'triko': triko})
-
 
 def show_details(request, id):
     cloth = get_object_or_404(Triko_Model, pk=id)
@@ -45,3 +41,10 @@ def Like(request, id):
 def change_pic(request, id):
     img = get_object_or_404(color, pk=id)
     render(request, 'Triko/model_show.html', {'img': img})
+
+def listing(request):
+    contect_list = Triko_Model.objects.all()
+    paginator = Paginator(contect_list, 2)
+    page = request.GET.get('page')
+    contacts = paginator.get_page(page)
+    return render(request, 'Triko/list.html', {'contacts' : contacts, })
